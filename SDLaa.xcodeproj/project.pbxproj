@@ -8,16 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		AA54F57B2C0F9BDC00A4F22B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA54F57A2C0F9BDC00A4F22B /* main.cpp */; };
+		AA54F5862C0F9C2A00A4F22B /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA54F5822C0F9C2700A4F22B /* ShaderProgram.cpp */; };
+		AA54F5892C0F9CD900A4F22B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA54F5882C0F9CD900A4F22B /* OpenGL.framework */; };
+		AA54F58B2C0F9CDE00A4F22B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA54F58A2C0F9CDE00A4F22B /* Cocoa.framework */; };
+		AA54F5922C0F9D0100A4F22B /* shaders in Copy Files */ = {isa = PBXBuildFile; fileRef = AA54F5852C0F9C2800A4F22B /* shaders */; };
+		AA54F5932C0FA16000A4F22B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA54F58D2C0F9CF300A4F22B /* SDL2_image.framework */; };
+		AA54F5942C0FA16000A4F22B /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA54F58E2C0F9CF300A4F22B /* SDL2_mixer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AA54F5752C0F9BDC00A4F22B /* CopyFiles */ = {
+		AA54F5752C0F9BDC00A4F22B /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstPath = "";
+			dstSubfolderSpec = 6;
 			files = (
+				AA54F5922C0F9D0100A4F22B /* shaders in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -25,6 +33,16 @@
 /* Begin PBXFileReference section */
 		AA54F5772C0F9BDC00A4F22B /* SDLaa */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLaa; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA54F57A2C0F9BDC00A4F22B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		AA54F5812C0F9C2700A4F22B /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
+		AA54F5822C0F9C2700A4F22B /* ShaderProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
+		AA54F5832C0F9C2700A4F22B /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		AA54F5842C0F9C2800A4F22B /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
+		AA54F5852C0F9C2800A4F22B /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shaders; sourceTree = "<group>"; };
+		AA54F5882C0F9CD900A4F22B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		AA54F58A2C0F9CDE00A4F22B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		AA54F58C2C0F9CF300A4F22B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		AA54F58D2C0F9CF300A4F22B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
+		AA54F58E2C0F9CF300A4F22B /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +50,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA54F5932C0FA16000A4F22B /* SDL2_image.framework in Frameworks */,
+				AA54F5942C0FA16000A4F22B /* SDL2_mixer.framework in Frameworks */,
+				AA54F58B2C0F9CDE00A4F22B /* Cocoa.framework in Frameworks */,
+				AA54F5892C0F9CD900A4F22B /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +65,7 @@
 			children = (
 				AA54F5792C0F9BDC00A4F22B /* SDLaa */,
 				AA54F5782C0F9BDC00A4F22B /* Products */,
+				AA54F5872C0F9CD900A4F22B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +80,26 @@
 		AA54F5792C0F9BDC00A4F22B /* SDLaa */ = {
 			isa = PBXGroup;
 			children = (
+				AA54F5842C0F9C2800A4F22B /* glm */,
+				AA54F5822C0F9C2700A4F22B /* ShaderProgram.cpp */,
+				AA54F5812C0F9C2700A4F22B /* ShaderProgram.h */,
+				AA54F5852C0F9C2800A4F22B /* shaders */,
+				AA54F5832C0F9C2700A4F22B /* stb_image.h */,
 				AA54F57A2C0F9BDC00A4F22B /* main.cpp */,
 			);
 			path = SDLaa;
+			sourceTree = "<group>";
+		};
+		AA54F5872C0F9CD900A4F22B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA54F58D2C0F9CF300A4F22B /* SDL2_image.framework */,
+				AA54F58E2C0F9CF300A4F22B /* SDL2_mixer.framework */,
+				AA54F58C2C0F9CF300A4F22B /* SDL2.framework */,
+				AA54F58A2C0F9CDE00A4F22B /* Cocoa.framework */,
+				AA54F5882C0F9CD900A4F22B /* OpenGL.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,7 +111,7 @@
 			buildPhases = (
 				AA54F5732C0F9BDC00A4F22B /* Sources */,
 				AA54F5742C0F9BDC00A4F22B /* Frameworks */,
-				AA54F5752C0F9BDC00A4F22B /* CopyFiles */,
+				AA54F5752C0F9BDC00A4F22B /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -120,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA54F57B2C0F9BDC00A4F22B /* main.cpp in Sources */,
+				AA54F5862C0F9C2A00A4F22B /* ShaderProgram.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +205,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = arg64;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -179,7 +221,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -225,6 +267,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -234,9 +277,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -245,6 +289,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = arg64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
+					/Library/Frameworks/SDL2.framework/Versions/A/Headers,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -253,6 +307,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
+					/Library/Frameworks/SDL2.framework/Versions/A/Headers,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
