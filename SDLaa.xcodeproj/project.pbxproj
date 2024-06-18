@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA39660B2C1A23960004EE4A /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA54F58C2C0F9CF300A4F22B /* SDL2.framework */; };
+		AA3966192C20A62D0004EE4A /* helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA3966182C20A62D0004EE4A /* helper.cpp */; };
 		AA54F57B2C0F9BDC00A4F22B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA54F57A2C0F9BDC00A4F22B /* main.cpp */; };
 		AA54F5862C0F9C2A00A4F22B /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA54F5822C0F9C2700A4F22B /* ShaderProgram.cpp */; };
 		AA54F5892C0F9CD900A4F22B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA54F5882C0F9CD900A4F22B /* OpenGL.framework */; };
@@ -31,6 +33,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AA3966052C18D6C80004EE4A /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		AA3966182C20A62D0004EE4A /* helper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = helper.cpp; sourceTree = "<group>"; };
+		AA39661C2C20CCA50004EE4A /* silence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silence.png; sourceTree = "<group>"; };
+		AA39661D2C20CCBB0004EE4A /* drone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drone.png; sourceTree = "<group>"; };
+		AA39661E2C20FF5A0004EE4A /* logo_rhine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_rhine.png; sourceTree = "<group>"; };
 		AA54F5772C0F9BDC00A4F22B /* SDLaa */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLaa; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA54F57A2C0F9BDC00A4F22B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AA54F5812C0F9C2700A4F22B /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
@@ -50,10 +57,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA54F5932C0FA16000A4F22B /* SDL2_image.framework in Frameworks */,
-				AA54F5942C0FA16000A4F22B /* SDL2_mixer.framework in Frameworks */,
 				AA54F58B2C0F9CDE00A4F22B /* Cocoa.framework in Frameworks */,
 				AA54F5892C0F9CD900A4F22B /* OpenGL.framework in Frameworks */,
+				AA54F5932C0FA16000A4F22B /* SDL2_image.framework in Frameworks */,
+				AA54F5942C0FA16000A4F22B /* SDL2_mixer.framework in Frameworks */,
+				AA39660B2C1A23960004EE4A /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +88,10 @@
 		AA54F5792C0F9BDC00A4F22B /* SDLaa */ = {
 			isa = PBXGroup;
 			children = (
+				AA39661E2C20FF5A0004EE4A /* logo_rhine.png */,
+				AA39661D2C20CCBB0004EE4A /* drone.png */,
+				AA39661C2C20CCA50004EE4A /* silence.png */,
+				AA3966182C20A62D0004EE4A /* helper.cpp */,
 				AA54F5842C0F9C2800A4F22B /* glm */,
 				AA54F5822C0F9C2700A4F22B /* ShaderProgram.cpp */,
 				AA54F5812C0F9C2700A4F22B /* ShaderProgram.h */,
@@ -93,6 +105,7 @@
 		AA54F5872C0F9CD900A4F22B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA3966052C18D6C80004EE4A /* SDL2.framework */,
 				AA54F58D2C0F9CF300A4F22B /* SDL2_image.framework */,
 				AA54F58E2C0F9CF300A4F22B /* SDL2_mixer.framework */,
 				AA54F58C2C0F9CF300A4F22B /* SDL2.framework */,
@@ -161,6 +174,7 @@
 			files = (
 				AA54F57B2C0F9BDC00A4F22B /* main.cpp in Sources */,
 				AA54F5862C0F9C2A00A4F22B /* ShaderProgram.cpp in Sources */,
+				AA3966192C20A62D0004EE4A /* helper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,9 +218,9 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				EXCLUDED_ARCHS = arg64;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				EXCLUDED_ARCHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -221,10 +235,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -266,9 +281,9 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				EXCLUDED_ARCHS = "";
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -277,10 +292,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -291,9 +307,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				EXCLUDED_ARCHS = arg64;
 				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
 					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
