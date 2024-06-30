@@ -35,9 +35,7 @@
 /* Begin PBXFileReference section */
 		AA3966052C18D6C80004EE4A /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		AA3966182C20A62D0004EE4A /* helper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = helper.cpp; sourceTree = "<group>"; };
-		AA39661C2C20CCA50004EE4A /* silence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silence.png; sourceTree = "<group>"; };
-		AA39661D2C20CCBB0004EE4A /* drone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drone.png; sourceTree = "<group>"; };
-		AA39661E2C20FF5A0004EE4A /* logo_rhine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_rhine.png; sourceTree = "<group>"; };
+		AA3966212C2F8ABB0004EE4A /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		AA54F5772C0F9BDC00A4F22B /* SDLaa */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLaa; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA54F57A2C0F9BDC00A4F22B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AA54F5812C0F9C2700A4F22B /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
@@ -88,15 +86,13 @@
 		AA54F5792C0F9BDC00A4F22B /* SDLaa */ = {
 			isa = PBXGroup;
 			children = (
-				AA39661E2C20FF5A0004EE4A /* logo_rhine.png */,
-				AA39661D2C20CCBB0004EE4A /* drone.png */,
-				AA39661C2C20CCA50004EE4A /* silence.png */,
 				AA3966182C20A62D0004EE4A /* helper.cpp */,
 				AA54F5842C0F9C2800A4F22B /* glm */,
 				AA54F5822C0F9C2700A4F22B /* ShaderProgram.cpp */,
 				AA54F5812C0F9C2700A4F22B /* ShaderProgram.h */,
 				AA54F5852C0F9C2800A4F22B /* shaders */,
 				AA54F5832C0F9C2700A4F22B /* stb_image.h */,
+				AA3966212C2F8ABB0004EE4A /* assets */,
 				AA54F57A2C0F9BDC00A4F22B /* main.cpp */,
 			);
 			path = SDLaa;
