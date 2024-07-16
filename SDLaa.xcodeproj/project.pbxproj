@@ -16,6 +16,8 @@
 		AA54F5922C0F9D0100A4F22B /* shaders in Copy Files */ = {isa = PBXBuildFile; fileRef = AA54F5852C0F9C2800A4F22B /* shaders */; };
 		AA54F5932C0FA16000A4F22B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA54F58D2C0F9CF300A4F22B /* SDL2_image.framework */; };
 		AA54F5942C0FA16000A4F22B /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA54F58E2C0F9CF300A4F22B /* SDL2_mixer.framework */; };
+		AA65F8AE2C3DA635007FEA1F /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA65F8AC2C3DA635007FEA1F /* sprite.cpp */; };
+		AA65F8B12C3DA677007FEA1F /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA65F8AF2C3DA677007FEA1F /* Entity.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +50,10 @@
 		AA54F58C2C0F9CF300A4F22B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		AA54F58D2C0F9CF300A4F22B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		AA54F58E2C0F9CF300A4F22B /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
+		AA65F8AC2C3DA635007FEA1F /* sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
+		AA65F8AD2C3DA635007FEA1F /* sprite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite.hpp; sourceTree = "<group>"; };
+		AA65F8AF2C3DA677007FEA1F /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		AA65F8B02C3DA677007FEA1F /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,10 @@
 				AA54F5832C0F9C2700A4F22B /* stb_image.h */,
 				AA3966212C2F8ABB0004EE4A /* assets */,
 				AA54F57A2C0F9BDC00A4F22B /* main.cpp */,
+				AA65F8AC2C3DA635007FEA1F /* sprite.cpp */,
+				AA65F8AD2C3DA635007FEA1F /* sprite.hpp */,
+				AA65F8AF2C3DA677007FEA1F /* Entity.cpp */,
+				AA65F8B02C3DA677007FEA1F /* Entity.hpp */,
 			);
 			path = SDLaa;
 			sourceTree = "<group>";
@@ -170,6 +180,8 @@
 			files = (
 				AA54F57B2C0F9BDC00A4F22B /* main.cpp in Sources */,
 				AA54F5862C0F9C2A00A4F22B /* ShaderProgram.cpp in Sources */,
+				AA65F8AE2C3DA635007FEA1F /* sprite.cpp in Sources */,
+				AA65F8B12C3DA677007FEA1F /* Entity.cpp in Sources */,
 				AA3966192C20A62D0004EE4A /* helper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +323,7 @@
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
 					/Library/Frameworks/SDL2.framework/Versions/A/Headers,
+					/Library/Frameworks/SDL2_mixer.framework/Versions/A/Headers,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -328,6 +341,7 @@
 				HEADER_SEARCH_PATHS = (
 					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
 					/Library/Frameworks/SDL2.framework/Versions/A/Headers,
+					/Library/Frameworks/SDL2_mixer.framework/Versions/A/Headers,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
