@@ -1,7 +1,7 @@
 /**
 * Author: Dani Kim
 * Assignment: Lunar Lander
-* Date due: 2024-07-13, 11:59pm (submitted 2024-07-16 w/ extension)
+* Date due: 2024-07-13, 11:59pm (submitted 2024-07-18 w/ extension)
 * I pledge that I have completed this assignment without
 * collaborating with anyone else, in conformance with the
 * NYU School of Engineering Policies and Procedures on
@@ -26,9 +26,9 @@
 // Default constructor
 Entity::Entity()
     : m_position(0.0f), m_movement(0.0f), m_scale(1.0f, 1.0f, 0.0f), m_model_matrix(1.0f),
-    m_speed(0.0f), m_animation_cols(0), m_animation_frames(0), m_animation_index(0),
-    m_animation_rows(0), m_animation_indices(nullptr), m_animation_time(0.0f),
-    m_texture_id(0), m_velocity(0.0f), m_acceleration(0.0f), m_width(0.0f), m_height(0.0f)
+    m_speed(0.0f), m_animation_cols(1), m_animation_frames(0), m_animation_index(0),
+    m_animation_rows(1), m_animation_indices(nullptr), m_animation_time(0.0f),
+    m_texture_id(0), m_velocity(0.0f), m_acceleration(0.0f), m_width(0.0f), m_height(0.0f), m_type(0)
 {
     // Initialize m_walking with zeros or any default value
     for (int i = 0; i < SECONDS_PER_FRAME; ++i)
@@ -36,7 +36,7 @@ Entity::Entity()
 }
 
 // Parameterized constructor
-Entity::Entity(GLuint texture_id, float speed, glm::vec3 acceleration, float jump_power, int walking[4][4], float animation_time,
+Entity::Entity(GLuint texture_id, float speed, glm::vec3 acceleration, float jump_power, int walking[1][1], float animation_time,
     int animation_frames, int animation_index, int animation_cols,
     int animation_rows, float width, float height)
     : m_position(0.0f), m_movement(0.0f), m_scale(1.0f, 1.0f, 0.0f), m_model_matrix(1.0f),
@@ -51,11 +51,11 @@ Entity::Entity(GLuint texture_id, float speed, glm::vec3 acceleration, float jum
 }
 
 // Simpler constructor for partial initialization
-Entity::Entity(GLuint texture_id, float speed,  float width, float height)
+Entity::Entity(GLuint texture_id, float speed,  float width, float height, int type)
     : m_position(0.0f), m_movement(0.0f), m_scale(1.0f, 1.0f, 0.0f), m_model_matrix(1.0f),
-    m_speed(speed), m_animation_cols(0), m_animation_frames(0), m_animation_index(0),
-    m_animation_rows(0), m_animation_indices(nullptr), m_animation_time(0.0f),
-    m_texture_id(texture_id), m_velocity(0.0f), m_acceleration(0.0f), m_width(width), m_height(height)
+    m_speed(speed), m_animation_cols(1), m_animation_frames(0), m_animation_index(0),
+    m_animation_rows(1), m_animation_indices(nullptr), m_animation_time(0.0f),
+    m_texture_id(texture_id), m_velocity(0.0f), m_acceleration(0.0f), m_width(width), m_height(height), m_type(type)
 {
     // Initialize m_walking with zeros or any default value
     for (int i = 0; i < SECONDS_PER_FRAME; ++i)
@@ -67,7 +67,7 @@ Entity::~Entity() { }
 void Entity::draw_sprite_from_texture_atlas(ShaderProgram* program, GLuint texture_id, int index)
 {
     // Step 1: Calculate the UV location of the indexed frame
-     float u_coord = (float)(index % m_animation_cols) / (float)m_animation_cols;
+    float u_coord = (float)(index % m_animation_cols) / (float)m_animation_cols;
     float v_coord = (float)(index / m_animation_cols) / (float)m_animation_rows;
 
     // Step 2: Calculate its UV size
@@ -110,7 +110,14 @@ bool const Entity::check_collision(Entity* other) const
     return x_distance < 0.0f && y_distance < 0.0f;
 }
 
-void const Entity::check_collision_y(Entity *collidable_entities, int collidable_entity_count)
+//bool Entity::check_collision2(Entity& other) {
+//    float x_dist = fabs(this->position.x - other.position.x) - ((this->width + other.width) / 2.0f);
+//    float y_dist = fabs(this->position.y - other.position.y) - ((this->height + other.height) / 2.0f);
+//    
+//    return x_distance < 0.0f && y_distance < 0.0f;
+//}
+
+void const Entity::check_collision_y(Entity *collidable_entities, int collidable_entity_count, int winner)
 {
     for (int i = 0; i < collidable_entity_count; i++)
     {
@@ -127,6 +134,11 @@ void const Entity::check_collision_y(Entity *collidable_entities, int collidable
 
                 // Collision!
                 m_collided_top  = true;
+//                if (collidable_entity_count = 1) {
+//                    winner = 1;
+//                } else if (collidable_entity_count = 3) {
+//                    winner = 2;
+//                }
             } else if (m_velocity.y < 0)
             {
                 m_position.y      += y_overlap;
@@ -134,12 +146,24 @@ void const Entity::check_collision_y(Entity *collidable_entities, int collidable
 
                 // Collision!
                 m_collided_bottom  = true;
+//                if (collidable_entity_count = 1) {
+//                    winner = 1;
+//                } else if (collidable_entity_count = 3) {
+//                    winner = 2;
+//                }
+            }
+            if (collidable_entity->m_type == 1) {
+                winner = 2;
+            }
+            // this code is never ever used apparently but I don't feel like refactoring/changing any of this atp
+            else if (collidable_entity->m_type == 2) {
+                winner = 1;
             }
         }
     }
 }
 
-void const Entity::check_collision_x(Entity *collidable_entities, int collidable_entity_count)
+void const Entity::check_collision_x(Entity *collidable_entities, int collidable_entity_count, int winner)
 {
     for (int i = 0; i < collidable_entity_count; i++)
     {
@@ -165,21 +189,26 @@ void const Entity::check_collision_x(Entity *collidable_entities, int collidable
                 // Collision!
                 m_collided_left  = true;
             }
+            if (collidable_entity->m_type == 1) {
+                winner = 2;
+            }
+            // this code is never ever used apparently but I don't feel like refactoring/changing any of this atp
+            else if (collidable_entity->m_type == 2) {
+                winner = 1;
+            }
         }
     }
 }
-void Entity::update(float delta_time, Entity* collidable_entities, int collidable_entity_count)
-
+void Entity::update(float delta_time, Entity* collidable_entities, int collidable_entity_count, int winner)
 {
-    
     m_collided_top    = false;
     m_collided_bottom = false;
     m_collided_left   = false;
     m_collided_right  = false;
-    for (int i = 0; i < collidable_entity_count; i++)
-    {
-        if (check_collision(&collidable_entities[i])) return;
-    }
+//    for (int i = 0; i < collidable_entity_count; i++)
+//    {
+//        if (check_collision(&collidable_entities[i])) return;
+//    }
 
     if (m_animation_indices != NULL)
     {
@@ -201,17 +230,43 @@ void Entity::update(float delta_time, Entity* collidable_entities, int collidabl
         }
     }
 
-    // Our character moves from left to right, so they need an initial velocity
-    m_velocity.x = m_movement.x * m_speed;
+    if (m_movement.x == 0.0f) {
+        if (m_velocity.x == 0.0f) {
+            m_acceleration.x = 0.0f;
+        } else {
+            if (m_velocity.x < 0.0f) {
+                m_acceleration.x = 1.0f * m_speed;
+            } else {
+                m_acceleration.x = -1.0f * m_speed;
+            }
+        }
+    } else {
+        m_acceleration.x = m_movement.x * m_speed;
+    }
+    
+    if (m_movement.y == 0.0f) {
+        if (m_velocity.y == -0.25f) {
+            m_acceleration.y = -0.25f;
+        } else {
+            if (m_velocity.y < -0.25f) {
+                m_acceleration.y = 1.0f * m_speed;
+            } else {
+                m_acceleration.y = -1.0f * m_speed;
+            }
+        }
+    } else {
+        m_acceleration.y = m_movement.y * m_speed;
+    }
     
     // And we add the gravity next
+    // int grav_mult = 4;
     m_velocity += m_acceleration * delta_time;
     
     m_position.y += m_velocity.y * delta_time;
-    check_collision_y(collidable_entities, collidable_entity_count);
+    check_collision_y(collidable_entities, collidable_entity_count, winner);
     
     m_position.x += m_velocity.x * delta_time;
-    check_collision_x(collidable_entities, collidable_entity_count);
+    check_collision_x(collidable_entities, collidable_entity_count, winner);
 
     if(m_is_jumping)
     {

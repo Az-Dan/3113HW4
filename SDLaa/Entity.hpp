@@ -1,5 +1,5 @@
-#ifndef ENTITY_H
-#define ENTITY_H
+#ifndef ENTITY_HPP
+#define ENTITY_HPP
 
 #include "glm/glm.hpp"
 #include "ShaderProgram.h"
@@ -9,14 +9,14 @@ enum AnimationDirection { LEFT, RIGHT, UP, DOWN };
 class Entity
 {
 private:
-    int m_walking[4][4]; // 4x4 array for walking animations
+    int m_walking[1][1]; // 4x4 array for walking animations
 
     // ————— TRANSFORMATIONS ————— //
     glm::vec3 m_movement;
     glm::vec3 m_position;
     glm::vec3 m_scale;
     glm::vec3 m_velocity;
-    glm::vec3 m_acceleration = glm::vec3(0.0f, -2.0f, 0.0f);
+    glm::vec3 m_acceleration;
 
     glm::mat4 m_model_matrix;
 
@@ -47,32 +47,33 @@ private:
     bool m_collided_right  = false;
 
 public:
+    int m_type = 0;
     bool m_gravity = false;
     // ————— STATIC VARIABLES ————— //
     static constexpr int SECONDS_PER_FRAME = 4;
 
     // ————— METHODS ————— //
     Entity();
-    Entity(GLuint texture_id, float speed, glm::vec3 acceleration, float jump_power, int walking[4][4], float animation_time,
+    Entity(GLuint texture_id, float speed, glm::vec3 acceleration, float jump_power, int walking[1][1], float animation_time,
         int animation_frames, int animation_index, int animation_cols,
            int animation_rows, float width, float height);
-    Entity(GLuint texture_id, float speed, float width, float height); // Simpler constructor
+    Entity(GLuint texture_id, float speed, float width, float height, int type); // Simpler constructor
     ~Entity();
 
     void draw_sprite_from_texture_atlas(ShaderProgram* program, GLuint texture_id, int index);
     bool const check_collision(Entity* other) const;
     
-    void const check_collision_y(Entity* collidable_entities, int collidable_entity_count);
-    void const check_collision_x(Entity* collidable_entities, int collidable_entity_count);
-    void update(float delta_time, Entity* collidable_entities, int collidable_entity_count);
+    void const check_collision_y(Entity* collidable_entities, int collidable_entity_count, int winner);
+    void const check_collision_x(Entity* collidable_entities, int collidable_entity_count, int winner);
+    void update(float delta_time, Entity* collidable_entities, int collidable_entity_count, int winner);
     void render(ShaderProgram* program);
 
     void normalise_movement() { m_movement = glm::normalize(m_movement); }
 
     void face_left() { m_animation_indices = m_walking[LEFT]; }
-    void face_right() { m_animation_indices = m_walking[RIGHT]; }
-    void face_up() { m_animation_indices = m_walking[UP]; }
-    void face_down() { m_animation_indices = m_walking[DOWN]; }
+    void face_right() { m_animation_indices = m_walking[LEFT]; }
+    void face_up() { m_animation_indices = m_walking[LEFT]; }
+    void face_down() { m_animation_indices = m_walking[LEFT]; }
 
     void move_left() { m_movement.x = -1.0f; face_left(); }
     void move_right() { m_movement.x = 1.0f;  face_right(); }
@@ -116,7 +117,7 @@ public:
     void const set_jumping_power(float new_jumping_power) { m_jumping_power = new_jumping_power;}
 
     // Setter for m_walking
-    void set_walking(int walking[4][4])
+    void set_walking(int walking[1][1])
     {
         for (int i = 0; i < 4; ++i)
         {
