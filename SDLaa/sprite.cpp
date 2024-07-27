@@ -1,7 +1,7 @@
 /**
-* Author: Dani Kim
-* Assignment: Lunar Lander
-* Date due: 2024-07-13, 11:59pm (submitted 2024-07-18 w/ extension)
+* Author: Dani KIm
+* Assignment: Rise of the AI
+* Date due: 2024-07-27, 11:59pm (submitted 2024-07-29 w/ extension
 * I pledge that I have completed this assignment without
 * collaborating with anyone else, in conformance with the
 * NYU School of Engineering Policies and Procedures on

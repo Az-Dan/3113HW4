@@ -1,7 +1,7 @@
 /**
-* Author: Dani Kim
-* Assignment: Lunar Lander
-* Date due: 2024-07-13, 11:59pm (submitted 2024-07-18 w/ extension)
+* Author: Dani KIm
+* Assignment: Rise of the AI
+* Date due: 2024-07-27, 11:59pm (submitted 2024-07-29 w/ extension
 * I pledge that I have completed this assignment without
 * collaborating with anyone else, in conformance with the
 * NYU School of Engineering Policies and Procedures on
@@ -491,16 +491,27 @@ void render()
                 // this text might not be perfectly centered but I tried
             }
             else if (g_game_winner == 2) { // fail
+                
+                
+        
                 draw_text(&g_shader_program, g_font_texture_id, "Birthday Ruined!", 0.4f, 0.05f,
                           glm::vec3(-3.45f, 1.75f, 0.0f));
-                draw_text(&g_shader_program, g_font_texture_id, "Press Q to quit", 0.3f, 0.05f,
+                
+                
+                
+                // OPTION 1 (normal?)
+                draw_text(&g_shader_program, g_font_texture_id, "YOU WIN", 0.3f, 0.05f,
                           glm::vec3(-2.6f, 0.0f, 0.0f));
             }
             else {
-                draw_text(&g_shader_program, g_font_texture_id, "Fortnite B-Day Lander!", 0.4f, 0.05f,
+                
+                // OPTION 2 (what I think is being asked for)
+                draw_text(&g_shader_program, g_font_texture_id, "Y", 0.4f, 0.05f,
                           glm::vec3(-4.7f, 1.75f, 0.0f));
-                draw_text(&g_shader_program, g_font_texture_id, "Press SPACE to start", 0.3f, 0.05f,
+                draw_text(&g_shader_program, g_font_texture_id, "O", 0.3f, 0.05f,
                           glm::vec3(-3.45f, 0.0f, 0.0f));
+                draw_text(&g_shader_program, g_font_texture_id, "U", 0.3f, 0.05f,
+                          glm::vec3(-3.45f, 0.0f, 0.0f)); // not formatted but you get the idea
             }
         }
     else if (g_app_status == RUNNING) {
