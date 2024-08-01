@@ -18,6 +18,8 @@
 		AA54F5942C0FA16000A4F22B /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA54F58E2C0F9CF300A4F22B /* SDL2_mixer.framework */; };
 		AA65F8AE2C3DA635007FEA1F /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA65F8AC2C3DA635007FEA1F /* sprite.cpp */; };
 		AA65F8B12C3DA677007FEA1F /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA65F8AF2C3DA677007FEA1F /* Entity.cpp */; };
+		AAD2286D2C560805005640D0 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD2286B2C560805005640D0 /* Utility.cpp */; };
+		AAD228702C56D172005640D0 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAD2286E2C56D172005640D0 /* Map.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +56,10 @@
 		AA65F8AD2C3DA635007FEA1F /* sprite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite.hpp; sourceTree = "<group>"; };
 		AA65F8AF2C3DA677007FEA1F /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		AA65F8B02C3DA677007FEA1F /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
+		AAD2286B2C560805005640D0 /* Utility.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utility.cpp; sourceTree = "<group>"; };
+		AAD2286C2C560805005640D0 /* Utility.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utility.hpp; sourceTree = "<group>"; };
+		AAD2286E2C56D172005640D0 /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		AAD2286F2C56D172005640D0 /* Map.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +110,10 @@
 				AA65F8AD2C3DA635007FEA1F /* sprite.hpp */,
 				AA65F8AF2C3DA677007FEA1F /* Entity.cpp */,
 				AA65F8B02C3DA677007FEA1F /* Entity.hpp */,
+				AAD2286B2C560805005640D0 /* Utility.cpp */,
+				AAD2286C2C560805005640D0 /* Utility.hpp */,
+				AAD2286E2C56D172005640D0 /* Map.cpp */,
+				AAD2286F2C56D172005640D0 /* Map.hpp */,
 			);
 			path = SDLaa;
 			sourceTree = "<group>";
@@ -178,10 +188,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAD2286D2C560805005640D0 /* Utility.cpp in Sources */,
 				AA54F57B2C0F9BDC00A4F22B /* main.cpp in Sources */,
 				AA54F5862C0F9C2A00A4F22B /* ShaderProgram.cpp in Sources */,
 				AA65F8AE2C3DA635007FEA1F /* sprite.cpp in Sources */,
 				AA65F8B12C3DA677007FEA1F /* Entity.cpp in Sources */,
+				AAD228702C56D172005640D0 /* Map.cpp in Sources */,
 				AA3966192C20A62D0004EE4A /* helper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
