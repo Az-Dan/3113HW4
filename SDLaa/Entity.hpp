@@ -4,9 +4,9 @@
 #include "Map.hpp"
 #include "glm/glm.hpp"
 #include "ShaderProgram.h"
-enum EntityType { PLATFORM, PLAYER, ENEMY, SHOT  };
-enum AIType     { WALKER, GUARD, SHOOTER, JUMPER, COWARD  };
-enum AIState    { WALKING, IDLE, ATTACKING };
+enum EntityType { PLATFORM, PLAYER, ENEMY, SHOT };
+enum AIType     { WALKER, GUARD, JUMPER, FLOATER, COWARD };
+enum AIState    { WALKING, IDLE, ATTACKING, JUMPING, FLOATING, FLEEING };
 
 
 enum AnimationDirection { LEFT, RIGHT, UP, DOWN };
@@ -15,6 +15,7 @@ class Entity
 {
 private:
     bool m_is_active = true;
+    int m_enemy_amt = 3;
     
     int m_walking[4][3]; // 4x4 array for walking animations - 3x4 for this assignment?
 
@@ -55,6 +56,11 @@ private:
     bool m_collided_bottom = false;
     bool m_collided_left   = false;
     bool m_collided_right  = false;
+    
+    bool m_map_collided_top    = false;
+    bool m_map_collided_bottom = false;
+    bool m_map_collided_left   = false;
+    bool m_map_collided_right  = false;
 
 public:
     // ————— STATIC VARIABLES ————— //
@@ -85,8 +91,10 @@ public:
     void ai_activate(Entity *player);
     void ai_walk();
     void ai_guard(Entity *player);
-    void ai_jump();
-    void ai_shoot();
+    void ai_coward(Entity* player);
+    void ai_jumper(Entity* player);
+    void ai_floater(Entity* player);
+//    void ai_shoot();
     
     void normalise_movement() { m_movement = glm::normalize(m_movement); }
 
@@ -117,6 +125,12 @@ public:
     bool      const get_collided_bottom() const { return m_collided_bottom; }
     bool      const get_collided_right() const { return m_collided_right; }
     bool      const get_collided_left() const { return m_collided_left; }
+    bool      const get_map_collided_top() const { return m_map_collided_top; }
+    bool      const get_map_collided_bottom() const { return m_map_collided_bottom; }
+    bool      const get_map_collided_right() const { return m_map_collided_right; }
+    bool      const get_map_collided_left() const { return m_map_collided_left; }
+    int       const get_enemy_amt() const { return m_enemy_amt; }
+    bool      const get_activity() const { return m_is_active; }
     
     void activate()   { m_is_active = true;  };
     void deactivate() { m_is_active = false; };
@@ -139,6 +153,7 @@ public:
     void const set_jumping_power(float new_jumping_power) { m_jumping_power = new_jumping_power;}
     void const set_width(float new_width) {m_width = new_width; }
     void const set_height(float new_height) {m_height = new_height; }
+    void const set_enemy_amt(int new_count) {m_enemy_amt = new_count;}
 
     // Setter for m_walking
     void set_walking(int walking[4][3])

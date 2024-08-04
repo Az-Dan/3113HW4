@@ -1,7 +1,7 @@
 /**
 * Author: Dani KIm
 * Assignment: Rise of the AI
-* Date due: 2024-07-27, 11:59pm (submitted 2024-07-29 w/ extension)
+* Date due: 2024-07-27, 11:59pm (submitted 2024-07-31 w/ extension)
 * I pledge that I have completed this assignment without
 * collaborating with anyone else, in conformance with the
 * NYU School of Engineering Policies and Procedures on
@@ -35,6 +35,18 @@ void Entity::ai_activate(Entity *player)
             ai_guard(player);
             break;
             
+        case COWARD:
+            ai_coward(player);
+            break;
+            
+        case JUMPER:
+            ai_jumper(player);
+            break;
+        
+        case FLOATER:
+            ai_floater(player);
+            break;
+            
         default:
             break;
     }
@@ -60,6 +72,28 @@ void Entity::ai_guard(Entity *player)
             }
             break;
             
+//        case JUMPING:
+//            if (m_position.y <= 5.0f) {
+//                jump();
+//            }
+//            break;
+//            
+//        case COWARD:
+//            if (m_position.x > player->get_position().x) {
+//                m_movement = glm::vec3(1.0f, 0.0f, 0.0f);
+//            } else {
+//                m_movement = glm::vec3(-1.0f, 0.0f, 0.0f);
+//            }
+//            break;
+//            
+//        case FLOATING:
+//            if (m_position.y > player->get_position().y) {
+//                m_movement = glm::vec3(0.0f, 1.0f, 0.0f);
+//            } else {
+//                m_movement = glm::vec3(0.0f, -1.0f, 0.0f);
+//            }
+//            break;
+
         case ATTACKING:
             break;
             
@@ -67,6 +101,70 @@ void Entity::ai_guard(Entity *player)
             break;
     }
 }
+
+///  tried putting everything in guard is more efficient + could make registering ai death easier??
+
+void Entity::ai_coward(Entity *player)
+{
+    switch (m_ai_state) {
+            
+        case IDLE:
+            if (glm::distance(m_position, player->get_position()) < 4.0f) m_ai_state = FLEEING;
+            break;
+            
+        case FLEEING:
+            if (m_position.x > player->get_position().x) {
+                m_movement = glm::vec3(1.0f, 0.0f, 0.0f);
+            } else {
+                m_movement = glm::vec3(-1.0f, 0.0f, 0.0f);
+            }
+            break;
+            
+        case ATTACKING:
+            break;
+            
+        default:
+            break;
+    }
+}
+
+void Entity::ai_jumper(Entity* player) // SOMEHOW THIS BECAME ANOTHER FLOATING GUY BUT WHATEVER
+{
+    switch (m_ai_state) {
+        case IDLE:
+//            while (m_is_active) {
+//                m_ai_state = JUMPING;
+//            }
+            if (glm::distance(m_position, player->get_position()) < 3.0f) m_ai_state = JUMPING;
+            break;
+        case JUMPING:
+           if (m_position.y <= 2.0f) {
+                jump();
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+void Entity::ai_floater(Entity *player) {
+    switch (m_ai_state) {
+        case IDLE:
+            if (glm::distance(m_position, player->get_position()) < 6.0f) m_ai_state = FLOATING;
+            break;
+        case FLOATING:
+            if (m_position.y >= player->get_position().y) {
+                m_movement = glm::vec3(0.4f, 0.0f, 0.0f);
+            } else {
+                m_movement = glm::vec3(-1.0f, 0.0f, 0.0f);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+
 // Default constructor
 Entity::Entity()
     : m_position(0.0f), m_movement(0.0f), m_scale(1.0f, 1.0f, 0.0f), m_model_matrix(1.0f),
@@ -162,33 +260,43 @@ bool const Entity::check_collision(Entity* other) const
     float x_distance = fabs(m_position.x - other->m_position.x) - ((m_width + other->m_width) / 2.0f);
     float y_distance = fabs(m_position.y - other->m_position.y) - ((m_height + other->m_height) / 2.0f);
 
-    return x_distance < 0.0f && y_distance < 0.0f;
+    return x_distance <= 0.0f && y_distance <= 0.0f;
 }
 
 void const Entity::check_collision_y(Entity *collidable_entities, int collidable_entity_count)
 {
     for (int i = 0; i < collidable_entity_count; i++)
     {
+
         Entity *collidable_entity = &collidable_entities[i];
-        
-        if (check_collision(collidable_entity))
-        {
-            float y_distance = fabs(m_position.y - collidable_entity->m_position.y);
-            float y_overlap = fabs(y_distance - (m_height / 2.0f) - (collidable_entity->m_height / 2.0f));
-            if (m_velocity.y > 0)
+        if (collidable_entity->m_is_active && m_entity_type == PLAYER && m_is_active) {
+            if (check_collision(collidable_entity))
             {
-                m_position.y   -= y_overlap;
-                m_velocity.y    = 0;
-
-                // Collision!
-                m_collided_top  = true;
-            } else if (m_velocity.y < 0)
-            {
-                m_position.y      += y_overlap;
-                m_velocity.y       = 0;
-
-                // Collision!
-                m_collided_bottom  = true;
+                float y_distance = fabs(m_position.y - collidable_entity->m_position.y);
+                float y_overlap = fabs(y_distance - (m_height / 2.0f) - (collidable_entity->m_height / 2.0f));
+                if (m_velocity.y > 0)
+                {
+                    m_position.y   -= y_overlap;
+                    m_velocity.y    = 0;
+                    
+                    // Collision!
+                    m_collided_top  = true;
+                } else if (m_velocity.y < 0)
+                {
+                    m_position.y      += y_overlap;
+                    m_velocity.y       = 0;
+                    
+                    // Collision!
+                    m_collided_bottom  = true;
+                    
+                    // enemy dies lmao
+                    if (collidable_entity->get_ai_type() == COWARD || collidable_entity->get_ai_type() == FLOATER || collidable_entity->get_ai_type() == JUMPER) { // THIS WORKS AND DETECTING ENEMIES DOESN'T WOW FML
+                        //if (m_collided_bottom) {
+                            collidable_entity->m_is_active = false;
+                            --m_enemy_amt;
+                        //}
+                    }
+                }
             }
         }
     }
@@ -200,25 +308,27 @@ void const Entity::check_collision_x(Entity *collidable_entities, int collidable
     {
         Entity *collidable_entity = &collidable_entities[i];
         
-        if (check_collision(collidable_entity))
-        {
-            float x_distance = fabs(m_position.x - collidable_entity->m_position.x);
-            float x_overlap = fabs(x_distance - (m_width / 2.0f) - (collidable_entity->m_width / 2.0f));
-            if (m_velocity.x > 0)
+        if (collidable_entity->m_is_active && m_entity_type == PLAYER && m_is_active) {
+            if (check_collision(collidable_entity))
             {
-                m_position.x     -= x_overlap;
-                m_velocity.x      = 0;
-
-                // Collision!
-                m_collided_right  = true;
-                
-            } else if (m_velocity.x < 0)
-            {
-                m_position.x    += x_overlap;
-                m_velocity.x     = 0;
- 
-                // Collision!
-                m_collided_left  = true;
+                float x_distance = fabs(m_position.x - collidable_entity->m_position.x);
+                float x_overlap = fabs(x_distance - (m_width / 2.0f) - (collidable_entity->m_width / 2.0f));
+                if (m_velocity.x > 0)
+                {
+                    m_position.x     -= x_overlap;
+                    m_velocity.x      = 0;
+                    
+                    // Collision!
+                    m_collided_right  = true;
+                    
+                } else if (m_velocity.x < 0)
+                {
+                    m_position.x    += x_overlap;
+                    m_velocity.x     = 0;
+                    
+                    // Collision!
+                    m_collided_left  = true;
+                }
             }
         }
     }
@@ -244,19 +354,19 @@ void const Entity::check_collision_y(Map *map)
     {
         m_position.y -= penetration_y;
         m_velocity.y = 0;
-        m_collided_top = true;
+        m_map_collided_top = true;
     }
     else if (map->is_solid(top_left, &penetration_x, &penetration_y) && m_velocity.y > 0)
     {
         m_position.y -= penetration_y;
         m_velocity.y = 0;
-        m_collided_top = true;
+        m_map_collided_top = true;
     }
     else if (map->is_solid(top_right, &penetration_x, &penetration_y) && m_velocity.y > 0)
     {
         m_position.y -= penetration_y;
         m_velocity.y = 0;
-        m_collided_top = true;
+        m_map_collided_top = true;
     }
     
     // And the bottom three points
@@ -264,20 +374,20 @@ void const Entity::check_collision_y(Map *map)
     {
         m_position.y += penetration_y;
         m_velocity.y = 0;
-        m_collided_bottom = true;
+        m_map_collided_bottom = true;
     }
     else if (map->is_solid(bottom_left, &penetration_x, &penetration_y) && m_velocity.y < 0)
     {
             m_position.y += penetration_y;
             m_velocity.y = 0;
-            m_collided_bottom = true;
+            m_map_collided_bottom = true;
     }
     else if (map->is_solid(bottom_right, &penetration_x, &penetration_y) && m_velocity.y < 0)
     {
         m_position.y += penetration_y;
         m_velocity.y = 0;
-        m_collided_bottom = true;
-        
+        m_map_collided_bottom = true;
+
     }
 }
 
@@ -294,13 +404,13 @@ void const Entity::check_collision_x(Map *map)
     {
         m_position.x += penetration_x;
         m_velocity.x = 0;
-        m_collided_left = true;
+        m_map_collided_left = true;
     }
     if (map->is_solid(right, &penetration_x, &penetration_y) && m_velocity.x > 0)
     {
         m_position.x -= penetration_x;
         m_velocity.x = 0;
-        m_collided_right = true;
+        m_map_collided_right = true;
     }
 }
 void Entity::update(float delta_time, Entity *player, Entity *collidable_entities, int collidable_entity_count, Map *map)
@@ -312,7 +422,21 @@ void Entity::update(float delta_time, Entity *player, Entity *collidable_entitie
     m_collided_left   = false;
     m_collided_right  = false;
     
-    if (m_entity_type == ENEMY) ai_activate(player);
+    m_map_collided_top    = false;
+    m_map_collided_bottom = false;
+    m_map_collided_left   = false;
+    m_map_collided_right  = false;
+
+    
+    //if (m_entity_type == ENEMY) ai_activate(player);
+    if (m_ai_type == JUMPER) ai_activate(player);
+    if (m_ai_type == FLOATER) ai_activate(player);
+    if (m_ai_type == COWARD) ai_activate(player);
+    
+    // AGAIN WHAT THE HELL
+
+    //ai_activate(player);
+
     
     if (m_animation_indices != NULL)
     {
@@ -338,18 +462,40 @@ void Entity::update(float delta_time, Entity *player, Entity *collidable_entitie
     m_velocity += m_acceleration * delta_time;
     
     m_position.y += m_velocity.y * delta_time;
-    check_collision_y(collidable_entities, collidable_entity_count);
     check_collision_y(map);
+    check_collision_y(collidable_entities, collidable_entity_count);
+
     
     m_position.x += m_velocity.x * delta_time;
-    check_collision_x(collidable_entities, collidable_entity_count);
     check_collision_x(map);
+    check_collision_x(collidable_entities, collidable_entity_count);
+
+    
+    // player dies lmao
+    if (m_entity_type == PLAYER) {
+        if (m_collided_top || m_collided_left || m_collided_right) {
+            deactivate();
+        }
+    }
+//    if (m_entity_type == ENEMY) {
+//        m_is_active = true;
+//    }
+    
     
     if (m_is_jumping)
     {
         m_is_jumping = false;
         m_velocity.y += m_jumping_power;
     }
+    
+    
+//    if (m_entity_type == ENEMY) { // necessary so that when coward falls over, he dies
+//        if (m_position.y <= -3.75f) {
+//            --m_enemy_amt;
+//            m_is_active = false;
+//        }
+//        //break;
+//    }
     
     m_model_matrix = glm::mat4(1.0f);
     m_model_matrix = glm::translate(m_model_matrix, m_position);
@@ -358,6 +504,8 @@ void Entity::update(float delta_time, Entity *player, Entity *collidable_entitie
 
 void Entity::render(ShaderProgram* program)
 {
+    if (!m_is_active) return;
+
     program->set_model_matrix(m_model_matrix);
 
     if (m_animation_indices != NULL)
